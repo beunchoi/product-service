@@ -27,10 +27,8 @@ public class ProductController {
   private final ProductService productService;
 
   @PostMapping
-  public ResponseEntity<ResponseMessage> createProduct(HttpServletRequest request,
-      @RequestBody ProductRequestDto requestDto) {
+  public ResponseEntity<ResponseMessage> createProduct(@RequestBody ProductRequestDto requestDto) {
     // 관리자 권한 검증
-    ParseRequestUtil.validateAdminRoleFromRequest(request);
     ProductResponseDto response = productService.createProduct(requestDto);
 
     ResponseMessage message = ResponseMessage.builder()
