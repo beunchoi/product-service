@@ -4,6 +4,7 @@ import com.hanghae.productservice.domain.product.dto.ProductResponseDto;
 import com.hanghae.productservice.domain.product.event.PaymentSuccessEvent;
 import com.hanghae.productservice.domain.product.service.ProductService;
 import com.hanghae.productservice.domain.product.service.ProductServiceImpl;
+import com.hanghae.productservice.domain.product.service.RedissonProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductInternalController {
 
   private final ProductService productService;
+  private final RedissonProductService redissonProductService;
 
   @PutMapping("/{productId}/incr/{quantity}")
   public ResponseEntity<ProductResponseDto> increaseProductStock(
@@ -43,7 +45,7 @@ public class ProductInternalController {
 
   @PostMapping("/decr")
   public ResponseEntity<?> decreaseProductStock(@RequestBody PaymentSuccessEvent event) {
-    productService.decreaseProductStock(event);
+    redissonProductService.decreaseProductStock(event);
     return ResponseEntity.status(200).build();
   }
 
