@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductInternalController {
 
   private final ProductService productService;
-  private final RedissonProductService redissonProductService;
 
   @PutMapping("/{productId}/incr/{quantity}")
   public ResponseEntity<ProductResponseDto> increaseProductStock(
@@ -45,7 +44,7 @@ public class ProductInternalController {
 
   @PostMapping("/decr")
   public ResponseEntity<?> decreaseProductStock(@RequestBody PaymentSuccessEvent event) {
-    redissonProductService.decreaseProductStock(event);
+    productService.decreaseProductStock(event);
     return ResponseEntity.status(200).build();
   }
 

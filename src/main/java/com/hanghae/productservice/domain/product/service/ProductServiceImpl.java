@@ -92,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
   @Transactional
   @Override
   public void decreaseProductStock(PaymentSuccessEvent event) {
-    Product product = productRepository.findByProductIdWithLock(event.getProductId())
+    Product product = productRepository.findByProductId(event.getProductId())
         .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다."));
 //    if (product.getStock() <= event.getQuantity()) {
     if (product.getStock() >= event.getQuantity()) {
