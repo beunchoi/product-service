@@ -90,7 +90,7 @@ public class ProductServiceImplSync implements ProductService {
   }
 
   @Override
-  public synchronized void decreaseProductStock(PaymentSuccessEvent event) {
+  public void decreaseProductStock(PaymentSuccessEvent event) {
     Product product = productRepository.findByProductId(event.getProductId())
         .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다."));
 //    if (product.getStock() <= event.getQuantity()) {
