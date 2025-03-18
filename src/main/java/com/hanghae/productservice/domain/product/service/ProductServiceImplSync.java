@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Primary
 public class ProductServiceImplSync implements ProductService {
 
   private final ProductRepository productRepository;
